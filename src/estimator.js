@@ -1,3 +1,13 @@
-const covid19ImpactEstimator = (data) => data;
+import getImpactData from './utils/util';
 
-export default covid19ImpactEstimator;
+const covid19ImpactEstimator = (data) => {
+  const estimatedData = {
+    data: { ...data },
+    impact: { ...getImpactData(data, 'impact') },
+    severeImpact: { ...getImpactData(data, 'severe') }
+  };
+
+  return estimatedData;
+};
+
+module.exports = covid19ImpactEstimator;
