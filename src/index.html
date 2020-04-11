@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000" />
+  
+  <meta
+    name="description"
+    content="A COVID-19 infections impact estimator for #BuildForSDG Cohort1 Assessment."
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+
+  <title>COVID-19 Impact Estimator</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+      <a class="pure-menu-heading" href="#">COVID-19 Impact Estimator</a>
+
+      <img height="40" width="40" alt="Covid19ImpactIcon" class="pure-img-responsive" src="./img/covid-19.webp" />
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="pure-g">
+      <div class="l-box-lrg pure-u-1 pure-u-md-1-4" >
+        <form class="pure-form pure-form-stacked" action="#" id="formInputData">
+          <fieldset>
+            <legend>Estimation Data</legend>
+            <span class="pure-form-message">* - required fields</span>
+        
+            <label for="region">
+                <span class="pure-form-required">*</span>Region</label>
+            <input id="region" name="region" type="text" placeholder="Region" 
+              value="Africa" required data-region>
+
+            <label for="avgDailyIncomeInUSD">
+                <span class="pure-form-required">*</span>Avg. Daily Income In USD ($)</label>
+            <input id="avgDailyIncomeInUSD" name="avgDailyIncomeInUSD" 
+              type="number" min="1" value="5" placeholder="$" required 
+              data-avg-daily-income-in-usd>
+
+            <label for="avgDailyIncomePopulation">
+                <span class="pure-form-required">*</span>Avg. Daily Income Population</label>
+            <input id="avgDailyIncomePopulation" name="avgDailyIncomePopulation" 
+              type="number" min="0.01" step="0.01" value="0.71" placeholder="0.71" 
+              required data-avg-daily-income-population>
+        
+            <label for="periodType">
+                <span class="pure-form-required">*</span>Period Type</label>
+            <select id="periodType" name="periodType" required data-period-type>
+              <option value="days" selected>Days</option>
+              <option value="weeks">Weeks</option>
+              <option value="months">Months</option>
+            </select>
+
+            <label for="timeToElapse">
+                <span class="pure-form-required">*</span>Period</label>
+            <input id="timeToElapse" name="timeToElapse" type="number" min="1" 
+              placeholder="Period" required data-time-to-elapse>
+
+            <label for="totalHospitalBeds">
+                <span class="pure-form-required">*</span>Total Hospital Beds</label>
+            <input id="totalHospitalBeds" name="totalHospitalBeds" 
+              type="number" min="1" placeholder="Total Hospital Beds" required 
+              data-total-hospital-beds>
+
+            <label for="reportedCases">
+                <span class="pure-form-required">*</span>Reported Cases</label>
+            <input id="reportedCases" name="reportedCases" type="number" min="1" 
+              placeholder="Reported Cases" required data-reported-cases>
+
+            <label for="population">
+                <span class="pure-form-required">*</span>Population</label>
+            <input id="population" name="population" type="number" min="1" 
+              placeholder="Population" required data-population>
+        
+            <button type="submit" class="pure-button pure-button-primary" data-go-estimate>
+              Estimate
+            </button>
+          </fieldset>
+        </form>
+      </div>
+      <div class="l-box-lrg pure-u-1 pure-u-md-1-4">
+        <form class="pure-form pure-form-stacked" action="#" id="formLastInputData">
+            <fieldset>
+              <legend>Last Estimation Data</legend>
+          
+              <label for="lastRegion">Region</label>
+              <input id="lastRegion" name="region" type="text" disabled data-last-region>
+  
+              <label for="lastAvgDailyIncomeInUSD">Avg. Daily Income In USD ($)</label>
+              <input id="lastAvgDailyIncomeInUSD" name="avgDailyIncomeInUSD" 
+                type="number" min="1" disabled data-last-avg-daily-income-in-usd>
+  
+              <label for="lastAvgDailyIncomePopulation">Avg. Daily Income Population</label>
+              <input id="lastAvgDailyIncomePopulation" name="avgDailyIncomePopulation" 
+                type="number" min="0.01" step="0.01" disabled data-last-avg-daily-income-population>
+          
+              <label for="lastPeriodType">Period Type</label>
+              <select id="lastPeriodType" name="periodType" disabled data-last-period-type>
+                <option value="days" selected>Days</option>
+                <option value="weeks">Weeks</option>
+                <option value="months">Months</option>
+              </select>
+  
+              <label for="lastTimeToElapse">Period</label>
+              <input id="lastTimeToElapse" name="timeToElapse" type="number" min="1" 
+                disabled data-last-time-to-elapse>
+  
+              <label for="lastTotalHospitalBeds">Total Hospital Beds</label>
+              <input id="lastTotalHospitalBeds" name="totalHospitalBeds" 
+                type="number" min="1" disabled disabled data-last-total-hospital-beds>
+  
+              <label for="lastReportedCases">Reported Cases</label>
+              <input id="lastReportedCases" name="reportedCases" type="number" min="1" 
+                disabled data-last-reported-cases>
+  
+              <label for="lastPopulation">Population</label>
+              <input id="lastPopulation" name="population" type="number" min="1" 
+                disabled data-last-population>
+
+            </fieldset>
+          </form>
+      </div>
+      <div class="l-box-lrg pure-u-1 pure-u-md-1-2" >
+        <h2 class="pure-table-header is-center">Estimated Data</h2>
+        <table class="pure-table" id="tableEstimatedData">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Impact</th>
+                    <th>Severe Impact</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr class="pure-table-odd" id="currentlyInfected">
+                    <td>Currently Infected</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+        
+                <tr id="infectionsByRequestedTime">
+                    <td>Infections By Requested Time</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+        
+                <tr class="pure-table-odd" id="severeCasesByRequestedTime">
+                    <td>Severe Cases By Requested Time</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+        
+                <tr id="hospitalBedsByRequestedTime">
+                    <td>Hospital Beds By Requested Time</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+        
+                <tr class="pure-table-odd" id="casesForICUByRequestedTime">
+                    <td>Cases For ICU By Requested Time</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+        
+                <tr id="casesForVentilatorsByRequestedTime">
+                    <td>Cases For Ventilators By RequestedTime</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+        
+                <tr class="pure-table-odd" id="dollarsInFlight">
+                    <td>Dollars In Flight</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
